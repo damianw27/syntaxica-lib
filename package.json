@@ -1,6 +1,6 @@
 {
   "name": "@syntaxica/lib",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "dist/lib.web.mjs",
   "types": "dist/lib/index.d.ts",
   "files": [
