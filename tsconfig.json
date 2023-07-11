@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "declaration": true,
+    "strict": true,
+    "newLine": "lf",
+    "allowJs": true,
+    "downlevelIteration": true,
+    "outDir": "dist",
+    "declarationDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "$root/*": [
+        "src/*"
+      ],
+      "$cli/*": [
+        "src/cli/*"
+      ],
+      "$lib/*": [
+        "src/lib/*"
+      ]
+    }
+  },
+  "include": [
+    "./src/**/*",
+    "./test/**/*"
+  ]
+}

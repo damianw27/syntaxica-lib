@@ -1,0 +1,12 @@
+/.idea
+/node_modules
+/src
+.eslintignore
+.eslintrc.js
+.gitattibute
+.gitignore
+.npmignore
+.prettierrc.js
+tsconfig.json
+webpack.config.js
+yarn.lock
