@@ -12,3 +12,8 @@ export const convertToKebabCase = (fileName: string): string => {
 
   return foundStrategy.convert(fileName);
 };
+
+export const removeExtension = (fileName: string): string => {
+  const lastDotIndex = fileName.lastIndexOf('.');
+  return lastDotIndex === -1 ? fileName : fileName.substring(0, lastDotIndex);
+};

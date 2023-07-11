@@ -2,9 +2,12 @@ import { execSync } from 'child_process';
 import { resolve } from 'path';
 import { readFileSync, writeFileSync, rmSync, readdirSync, mkdirSync } from 'fs';
 import { loadConfig } from '$cli/utils/config-util';
-import { convertToKebabCase } from '$cli/utils/file-name/file-name-util';
+import { convertToKebabCase, removeExtension } from '$cli/utils/file-name/file-name-util';
 
 const extensionsToDelete = ['interp', 'tokens'];
+
+const REGEX_SPEC_CHARS_REGEX = /[.*+\-?^${}()|[\]\\]/g;
+const ESCAPED_CHAR_PATTERN = '\\$&';
 
 export const generate = async (): Promise<void> => {
   const config = loadConfig();
@@ -75,17 +78,46 @@ export const generate = async (): Promise<void> => {
       }
 
       const sourcePath = `${sourcesRoot}/${grammarName}/${fileName}`;
+      const newFileName = convertToKebabCase(fileName);
 
       try {
-        const sourceContent = readFileSync(sourcePath, 'utf-8').replace(/['"]antlr4['"]/g, "'@syntaxica/antlr'");
-        const newFileName = convertToKebabCase(fileName);
+        let sourceContent = readFileSync(sourcePath, 'utf-8').replace(/['"]antlr4['"]/g, "'@syntaxica/antlr'");
+
+        generatedFiles.forEach((subFileName) => {
+          const fileNameWithNoExtension = removeExtension(subFileName).replace(
+            REGEX_SPEC_CHARS_REGEX,
+            ESCAPED_CHAR_PATTERN,
+          );
+
+          const fileNameJavaScript = `${fileNameWithNoExtension}.js`.replace(
+            REGEX_SPEC_CHARS_REGEX,
+            ESCAPED_CHAR_PATTERN,
+          );
+
+          const fileNameTypeScript = `${fileNameWithNoExtension}.ts`.replace(
+            REGEX_SPEC_CHARS_REGEX,
+            ESCAPED_CHAR_PATTERN,
+          );
+
+          const newSubFileName = `'./${removeExtension(convertToKebabCase(subFileName))}'`;
+
+          const replaceRegExp = new RegExp(
+            `['"]\\.\\/(${fileNameWithNoExtension}|${fileNameJavaScript}|${fileNameTypeScript})['"]`,
+            'g',
+          );
+
+          sourceContent = sourceContent.replace(replaceRegExp, newSubFileName);
+        });
+
         const newSourcePath = `${sourcesRoot}/${grammarName}/${newFileName}`;
 
         writeFileSync(newSourcePath, sourceContent);
         rmSync(sourcePath);
 
         if (config.eslintConfig !== undefined) {
-          execSync(`npx eslint ${newSourcePath} --fix -c ${config.eslintConfig}`, { stdio: 'inherit' });
+          execSync(`npx eslint ${newSourcePath} --fix --no-ignore --quiet -c ${config.eslintConfig}`, {
+            stdio: 'inherit',
+          });
         }
       } catch (error: any) {
         console.log(`Unable to transform file '${sourcePath}': ${error.message}`);

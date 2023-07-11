@@ -7,6 +7,8 @@ export * from '$lib/types/grammar-parsing-error';
 export * from '$lib/types/worker-info';
 export * from '$lib/code-suggestion/types/case-kind';
 export * from '$lib/code-suggestion/suggestions-provider';
+export * from '$lib/error-listener/lexing-error-listener';
+export * from '$lib/error-listener/parsing-error-listener';
 export * from '$lib/grammar-builder/types/grammar-definition';
 export * from '$lib/grammar-builder/types/syntax-object';
 export * from '$lib/grammar-builder/types/syntax-token';

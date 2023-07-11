@@ -1,5 +1,5 @@
 import { ErrorListener, Recognizer, Token } from '@syntaxica/antlr';
-import { GrammarParsingError } from '@syntaxica/lib';
+import { GrammarParsingError } from '$root/lib';
 
 export class ParsingErrorListener implements ErrorListener<Token> {
   private readonly _errors: GrammarParsingError[] = [];
