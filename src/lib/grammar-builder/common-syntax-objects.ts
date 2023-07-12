@@ -1,5 +1,5 @@
 import { SyntaxObject } from '$lib/grammar-builder/types/syntax-object';
-import { SyntaxType } from '$lib/grammar-builder/types/syntax-type';
+import { SyntaxType } from '$lib/grammar-builder/enums/syntax-type';
 
 const COMMENT_BLOCK_REGEX = /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/;
 const COMMENT_REGEX = /(^|[^\\:])\/\/.*/;

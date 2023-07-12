@@ -1,7 +1,7 @@
 import { Lexer, Parser } from '@syntaxica/antlr';
 import { LexerFactory } from '$lib/code-suggestion/types/lexer-factory';
 import { ParserFactory } from '$lib/code-suggestion/types/parser-factory';
-import { CaseKind } from '$lib/code-suggestion/types/case-kind';
+import { CaseKind } from '$lib/code-suggestion/enums/case-kind';
 import { SuggestionsBuilder } from '$lib/code-suggestion/suggestions-builder';
 
 export class SuggestionsProvider<L extends Lexer, P extends Parser> {

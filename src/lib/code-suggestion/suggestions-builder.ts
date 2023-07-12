@@ -1,7 +1,7 @@
 import { ATN, ATNState, AtomTransition, Lexer, Parser, SetTransition, Token, Transition } from '@syntaxica/antlr';
 import { LexerWrapper } from '$lib/code-suggestion/lexer-wrapper';
 import { LexerFactory } from '$lib/code-suggestion/types/lexer-factory';
-import { CaseKind } from '$lib/code-suggestion/types/case-kind';
+import { CaseKind } from '$lib/code-suggestion/enums/case-kind';
 import { ParserFactory } from '$lib/code-suggestion/types/parser-factory';
 import { TokenSuggester } from '$lib/code-suggestion/token-suggester';
 

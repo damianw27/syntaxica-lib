@@ -1,5 +1,5 @@
 import { SyntaxObject } from '$lib/grammar-builder/types/syntax-object';
-import { SyntaxType } from '$lib/grammar-builder/types/syntax-type';
+import { SyntaxType } from '$lib/grammar-builder/enums/syntax-type';
 import { GrammarDefinition } from '$lib/grammar-builder/types/grammar-definition';
 
 const UNICODE_ESCAPED_CHAR_REGEX = /\\\\u/g;
